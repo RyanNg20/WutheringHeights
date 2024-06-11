@@ -6,11 +6,11 @@ import '@fontsource/roboto/700.css';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Image from 'next/image'
 import { useState } from 'react';
 
 export default function Home() {
@@ -21,21 +21,17 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Wuthering Heights</title>
         <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
       </Head>
 
       <main>
-        <Typography variant="h1" color="primary">
-          Home
-        </Typography>
-          <FormControl fullWidth>
+        <h1 class="text-p">
+          test
+        </h1>
+          {/* <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Age</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -49,11 +45,8 @@ export default function Home() {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
+          <Image src={'/white_logo.png'} width={200} height={200}/> */}
       </main>
-
-      <footer>
-
-      </footer>
     </div>
   );
 }
