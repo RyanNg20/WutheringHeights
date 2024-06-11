@@ -25,7 +25,9 @@ export default function Home() {
   ]
 
   return (
-    <div class="min-h-[calc(100vh*1544/808)] bg-[url('/background.png')] bg-cover bg-[50%_52.33%]">
+    <div>
+      {/* Background Image */}
+      <div class="w-[100vw] min-h-[calc(100vh*1544/808)] bg-[url('/background.png')] bg-cover bg-[50%_52.33%] absolute top-0 z-[-1]"/>
       <ContentWrapper>
         <main class="h-[100vh] flex flex-col justify-center">
           <Typography variant='h1'>
@@ -54,9 +56,9 @@ export default function Home() {
           <Typography variant='p' style={{paddingLeft: 23, marginTop: 34, borderLeft: `1px solid ${theme.colors.lightGray}`}}>
             Wuthering Heights is a <span class="font-bold">FREE</span> interactive platform that <span class="font-bold">SOLVES</span> these issues in three steps. 
           </Typography>
-          <div class="flex flex-row justify-between gap-[16px] h-[348px] mt-[45px] mb-[50px]">
+          <div class="flex flex-row justify-between gap-[16px] mt-[45px] mb-[50px] flex-wrap">
             {solutionDescriptions.map((description, i) => (
-              <div class="flex flex-col bg-gray grow items-center justify-center rounded-md gap-[30px]">
+              <div class="flex flex-col bg-gray grow items-center justify-center rounded-md gap-[30px] flex-wrap min-w-[250px] py-[50px]">
                 <Typography variant="h3">
                   {i}
                 </Typography>

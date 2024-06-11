@@ -25,6 +25,8 @@
 
 html,
 body {
+  position: relative;
+  z-index: 1;
   overflow-x: hidden;
   font-family: inter;
   background-color: #111111;
