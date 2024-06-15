@@ -20,9 +20,9 @@ export default function Home() {
     "Obtain said echos with prayers to RNGesus"
   ]
   const solutionImages = [
-    <Image src="/emote1.png" height={114} width={114}/>,
-    <Image src="/emote2.png" height={114} width={114}/>,
-    <Image src="/emote3.png" height={114} width={114}/>,
+    <Image src="/emote1.png" height={114} width={114} alt="BaiZhi Emote"/>,
+    <Image src="/emote2.png" height={114} width={114} alt="Rover Emote"/>,
+    <Image src="/emote3.png" height={114} width={114} alt="Jiyun Emote"/>,
   ]
 
   return (

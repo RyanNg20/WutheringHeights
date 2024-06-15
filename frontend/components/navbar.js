@@ -10,7 +10,7 @@ const Navbar = () => {
       <div className="bg-darkGray h-[92px] w-[100svw] flex flex-row justify-between absolute top-0 left-0 z-[-1]"/>
       <button>
         <Link href="/">
-          <Image src={"/logo.png"} width={96} height={54} style={{objectFit: 'contain'}}/>
+          <Image src={"/logo.png"} width={96} height={54} style={{objectFit: 'contain'}} alt="Wuthering heights logo"/>
         </Link>
       </button>
 

@@ -58,6 +58,19 @@ body {
   border-color: red;
 } */
 
+.MuiInputBase-input {
+  background-color: var(--darkGray);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+}
+
+.MuiInputBase-root {
+  background-color: var(--darkGray);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline {
   border-color: var(--lightGray);
 }
@@ -68,6 +81,8 @@ body {
 
 .MuiSelect-filled {
   background-color: var(--darkGray);
+  /* color: var(--lightGray) */
+
 }
 
 .MuiSelect-filled:focus {

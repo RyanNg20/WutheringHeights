@@ -3,25 +3,24 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useState } from 'react';
 
-export default function Dropdown() {
-  const [age, setAge] = useState('')
+export default function Dropdown({state, setState, label, options, optionVals, required, disabled}) {
 
   return (
-    <FormControl fullWidth variant="filled">
-      <InputLabel id="label">Age</InputLabel>
+    <FormControl fullWidth variant="filled" required={required} disabled={disabled}>
+      <InputLabel id="label">{label}</InputLabel>
       <Select
         labelId="label"
         id="label"
-        value={age}
-        label="Age"
-        onChange={(event) => {setAge(event.target.value)}}
-        // style={{backgroundColor: "#000000"}}
+        value={state}
+        label={label}
+        onChange={(event) => {setState(event.target.value)}}
       >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {options.map((option, i) => {
+          return (
+            <MenuItem key={option} value={optionVals[i]}>{option}</MenuItem>
+          )
+        })}
       </Select>
     </FormControl>
   );

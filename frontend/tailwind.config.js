@@ -6,6 +6,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    flexGrow: {
+      0: '0',
+      1: '1',
+      2: '2',
+      3: '3',
+    },
     textColor: {
       orange: "#FF7A00",
       yellow: "#FFC700",
