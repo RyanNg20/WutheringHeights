@@ -7,6 +7,17 @@
   src:url("/Inter.ttf")
 }
 
+:root {
+  --orange: #FF7A00;
+  --yellow: #FFC700;
+  --white: #FFFFFF;
+  --black: #000000;
+  --lightGray: #878787;
+  --gray: #1B1B1B;
+  --darkGray: #0D0D0D;
+  --transparent: transparent;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 7px;
@@ -31,5 +42,45 @@ body {
   font-family: inter;
   background-color: #111111;
   color: #FFFFFF;
+}
+
+
+
+.MuiInputBase-root{
+  border-color: var(--lightGray);
+}
+
+/* .MuiFormLabel-root.Mui-focused {
+  color: red;
+} */
+
+/* .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: red;
+} */
+
+.MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--lightGray);
+}
+
+.MuiInputBase-root:focus .MuiOutlinedInput-notchedOutline {
+  border-color: black;
+}
+
+.MuiSelect-filled {
+  background-color: var(--darkGray);
+}
+
+.MuiSelect-filled:focus {
+  background-color: var(--darkGray);
+}
+
+.MuiSelect-filled:hover {
+  background-color: var(--darkGray);
+}
+
+
+.MuiList-root {
+  background-color: var(--darkGray);
+  color: var(--lightGray)
 }
 

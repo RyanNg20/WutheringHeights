@@ -3,7 +3,11 @@ import '../styles/global.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
   typography: {
+    fontSize: 12,
     h1: {
       fontFamily: "Inter",
       fontSize: 40,
