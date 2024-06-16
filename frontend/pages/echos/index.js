@@ -7,14 +7,21 @@ import AddIcon from '@mui/icons-material/Add';
 import Modal from '../../components/modal';
 import Dropdown from '../../components/dropdown';
 import DropSlider from '../../components/dropSlider';
+import { Button1, Button2 } from '../../components/buttons'
 
 
 // ms: main stat, ss: substat
 export default function Echos() {
   const theme = useTheme()
+  
+  // ssRanges: associates all possible substats with min value max value and step size
+  // ssList: list of all possible substats
+  // costToMsVals1: associates different cost echos and a mainstat with a mainstat value
+  // costToMs1: associates different cost echos to a list of possible mainstats
+  const { ssRanges, ssList, costToMsVals1, costToMs1, costToMsVals2, costToMs2, sampleEchos } = data()
 
   const [selected, setSelected] = useState([])
-  const [showModal, setShowModal] = useState(true)
+  const [showModal, setShowModal] = useState(false)
 
   // state for creation of new echo
   const [name, setName] = useState("")
@@ -33,60 +40,76 @@ export default function Echos() {
   const [ss4Val, setSs4Val] = useState("")
   const [ss5Val, setSs5Val] = useState("")
 
-  // List of created Echos
-  const [echos, setEchos] = useState([
-    { name: "BOAR", cost: 1, ms1: "ATK%", ms2: "ATK%", ss1: "ATK%", ss2: "HP", ss3: "ATK", ss4: "Crit Rate", ss5: "Crit Damage", ss1Val: 0.325, ss2Val: 0.123, ss3Val: 0.325, ss4Val: 0.932, ss5Val: 0.392},
-    { name: "Tambourinist", cost: 4, ms1: "Glacio DMG Bonus", ms2: "ATK%", ss1: "ATK%", ss2: "HP", ss3: "ATK", ss4: "Crit Rate", ss5: "Crit Damage", ss1Val: 0.325, ss2Val: 0.123, ss3Val: 0.325, ss4Val: 0.932, ss5Val: 0.392},
-    { name: "BOAR", cost: 1, ms1: "Crit Rate", ms2: "ATK%", ss1: "ATK%", ss2: "HP", ss3: "ATK", ss4: "Crit Rate", ss5: "Crit Damage", ss1Val: 0.325, ss2Val: 0.123, ss3Val: 0.325, ss4Val: 0.932, ss5Val: 0.392},
-  ])
 
-  // ssRanges: associates all possible substats with min value max value and step size
-  // ssList: list of all possible substats
-  // costToMsVals: associates different cost echos and a mainstat with a mainstat value
-  // costToMs: associates different cost echos to a list of possible mainstats
-  const { ssRanges, ssList, costToMsVals, costToMs } = data()
+  // List of created Echos
+  const [echos, setEchos] = useState(sampleEchos)
 
   let dropSliderInfo = [
-    { state: ss1, setState: setSs1, label: "Substat 1" },
-    { state: ss2, setState: setSs2, label: "Substat 2" },
-    { state: ss3, setState: setSs3, label: "Substat 3" },
-    { state: ss4, setState: setSs4, label: "Substat 4" },
-    { state: ss5, setState: setSs5, label: "Substat 5" },
+    { selectState: ss1, setSelectState: setSs1, sliderState: ss1Val, setSliderState: setSs1Val, label: "Substat 1" },
+    { selectState: ss2, setSelectState: setSs2, sliderState: ss2Val, setSliderState: setSs2Val, label: "Substat 2" },
+    { selectState: ss3, setSelectState: setSs3, sliderState: ss3Val, setSliderState: setSs3Val, label: "Substat 3" },
+    { selectState: ss4, setSelectState: setSs4, sliderState: ss4Val, setSliderState: setSs4Val, label: "Substat 4" },
+    { selectState: ss5, setSelectState: setSs5, sliderState: ss5Val, setSliderState: setSs5Val, label: "Substat 5" },
   ]
+
+  const submitForm = () => {
+    setShowModal(false)
+    let newEcho = { name, cost, ms,msVal: costToMsVals1[cost][ms], ms2: costToMs2[cost], ms2Val: costToMsVals2[cost], ss1, ss2, ss3, ss4, ss5, ss1Val, ss2Val, ss3Val, ss4Val, ss5Val }
+
+    setEchos([...echos, newEcho])
+    setName("")
+    setCost("")
+    setMs("")
+    setSs1("")
+    setSs2("")
+    setSs3("")
+    setSs4("")
+    setSs5("")
+    setSs1Val("")
+    setSs2Val("")
+    setSs3Val("")
+    setSs4Val("")
+    setSs5Val("")
+  }
 
   return (
     <ContentWrapper>
       
-      <Modal>
-        <Typography variant="h2">
-          Create Echo
-        </Typography>
-        <Typography variant="p">
-          The app will assume the echo is rank 5 and level 25.
-        </Typography>
-        <div className='flex flex-row gap-8'>
-          <TextField id="filled-basic" label="Name" variant="filled" value={name} onChange={(event) => {setName(event.target.value)}} required fullWidth/>
+      <Modal showModal={showModal} setShowModal={setShowModal}>
+        <form className='bg-background p-16 rounded-lg flex flex-col w-[892px] gap-6'>
+          <Typography variant="h2">
+            Create Echo
+          </Typography>
+          <Typography variant="p">
+            The app will assume the echo is rank 5 and level 25.
+          </Typography>
+          <div className='flex flex-row gap-8'>
+            <TextField id="filled-basic" label="Name" variant="filled" value={name} onChange={(event) => {setName(event.target.value)}} required fullWidth/>
 
-          <Dropdown state={cost} setState={setCost} label="Cost" options={[1,3,4]} optionVals={[1,3,4]} required/>
-          <Dropdown state={ms} setState={setMs} label="Main stat" options={cost == ""?[]:costToMs[cost]} optionVals={cost == ""?[]:costToMs[cost]} disabled={cost==""} required/>
-        </div>
+            <Dropdown state={cost} setState={setCost} label="Cost" options={[1,3,4]} optionVals={[1,3,4]} required/>
+            <Dropdown state={ms} setState={setMs} label="Main stat" options={cost == ""?[]:costToMs1[cost]} optionVals={cost == ""?[]:costToMs1[cost]} disabled={cost==""} required/>
+          </div>
 
-        {dropSliderInfo.map((info, _) => {
-          return (
-            <DropSlider
-              key={info.label}
-              state={info.state} 
-              setState={info.setState} 
-              label={info.label} 
-              options={ssList} 
-              optionVals={ssList} 
-              min={info.state==""?0:ssRanges[info.state][0]}
-              max={info.state==""?0:ssRanges[info.state][1]}
-              step={info.state==""?0:ssRanges[info.state][2]}
-              disabled={info.state==""}
-            />
-          )
-        })}
+          {dropSliderInfo.map((info, _) => {
+            return (
+              <DropSlider
+                key={info.label}
+                selectState={info.selectState} 
+                setSelectState={info.setSelectState}
+                sliderState={info.sliderState==""?0:info.sliderState}
+                setSliderState={info.setSliderState}
+                label={info.label} 
+                options={ssList} 
+                optionVals={ssList} 
+                min={info.selectState==""?0:ssRanges[info.selectState][0]}
+                max={info.selectState==""?0:ssRanges[info.selectState][1]}
+                step={info.selectState==""?0:ssRanges[info.selectState][2]}
+                disabled={info.selectState==""}
+              />
+            )
+          })}
+          <Button1 label={"Submit"} onClick={submitForm} disabled={name==""||cost==""||ms==""}/>
+        </form>
       </Modal>
 
       <Navbar/>
@@ -130,9 +153,7 @@ export default function Echos() {
         })}
 
         {/* New Echo Button */}
-        <button className="p-4 rounded px-8 bg-sunset">
-          <AddIcon style={{height: 23}}/>
-        </button>
+        <Button2 onClick={() => {setShowModal(true)}}/>
       </div>
 
     </ContentWrapper>
@@ -140,6 +161,61 @@ export default function Echos() {
 }
 
 const data = () => {
+
+  const sampleEchos = [
+    { 
+      name: "BOAR", 
+      cost: 1, 
+      ms1: "ATK%", 
+      ms1Val: "0.33", 
+      ms2: "HP", 
+      msVal2: 2280, 
+      ss1: "ATK%", 
+      ss2: "HP", 
+      ss3: "ATK", 
+      ss4: "Crit Rate", 
+      ss5: "Crit Damage", 
+      ss1Val: 0.325, 
+      ss2Val: 0.123, 
+      ss3Val: 0.325, 
+      ss4Val: 0.932, 
+      ss5Val: 0.392
+    },
+    { 
+      name: "Tambourinist", 
+      cost: 3, 
+      ms1: "Glacio DMG Bonus", 
+      ms2: "ATK", 
+      msVal2: 100, 
+      ss1: "ATK%", 
+      ss2: "HP", 
+      ss3: "ATK", 
+      ss4: "Crit Rate", 
+      ss5: "Crit Damage", 
+      ss1Val: 0.325, 
+      ss2Val: 0.123, 
+      ss3Val: 0.325, 
+      ss4Val: 0.932, 
+      ss5Val: 0.392
+    },
+    { 
+      name: "BOAR", 
+      cost: 1, 
+      ms1: "Crit Rate", 
+      ms2: "HP", 
+      msVal2: 2280, 
+      ss1: "ATK%", 
+      ss2: "HP", 
+      ss3: "ATK", 
+      ss4: "Crit Rate", 
+      ss5: "Crit Damage", 
+      ss1Val: 0.325, 
+      ss2Val: 0.123, 
+      ss3Val: 0.325, 
+      ss4Val: 0.932, 
+      ss5Val: 0.392
+    },
+  ]
 
   // All possible mainstats that 4, 3, 1 costs can have respectively
   const msVals4 = {
@@ -192,21 +268,35 @@ const data = () => {
   }
   const ssList = Object.keys(ssRanges)
 
-  const costToMsVals = {
+  const costToMsVals1 = {
     4: msVals4,
     3: msVals3,
     1: msVals1,
   }
-  const costToMs = {
+  const costToMs1 = {
     4: msList4,
     3: msList3,
     1: msList1,
   }
 
+  const costToMsVals2 = {
+    4: 150,
+    3: 100,
+    1: 2280,
+  }
+  const costToMs2 = {
+    4: "ATK",
+    3: "ATK",
+    1: "HP",
+  }
+
   return {
     ssRanges,
     ssList,
-    costToMsVals,
-    costToMs,
+    costToMsVals1,
+    costToMs1,
+    costToMsVals2,
+    costToMs2,
+    sampleEchos
   }
 }
