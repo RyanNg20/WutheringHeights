@@ -58,6 +58,17 @@ body {
   border-color: red;
 } */
 
+
+.MuiButton-contained {
+  background: linear-gradient(to right, var(--yellow), var(--orange));
+  /* background-color: var(--orange); */
+}
+
+/* .MuiButton-contained:hover {
+  background-color: var(--yellow);
+
+} */
+
 .MuiInputBase-input {
   background-color: var(--darkGray);
   border-top-left-radius: 5px;

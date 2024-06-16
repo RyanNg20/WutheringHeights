@@ -7,9 +7,8 @@ import Typography from '@mui/material/Typography';
 import ContentWrapper from '../components/contentWrapper';
 import { useState } from 'react';
 import { useTheme } from '@emotion/react';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
-import Button1 from '../components/button1';
+import { Button1 } from '../components/buttons';
 import Link from 'next/link'
 
 export default function Home() {
@@ -38,7 +37,7 @@ export default function Home() {
             Wuthering Waves echo optimization and damage calculation. Clear Tower of Adversity effortlessly.
           </Typography>
           <Link href="/echos">
-            <Button1/>
+            <Button1 label={"Optimize"}/>
           </Link>
         </main>
         <div className="flex flex-col mt-[200px]">
@@ -74,7 +73,7 @@ export default function Home() {
             ))}
           </div>
           <Link href="/echos">
-            <Button1/>
+            <Button1 label={"Optimize"}/>
           </Link>
         </div>
       </ContentWrapper>
