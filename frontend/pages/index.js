@@ -60,7 +60,7 @@ export default function Home() {
           </Typography>
           <div className="flex flex-row justify-between gap-[16px] mt-[45px] mb-[50px] flex-wrap">
             {solutionDescriptions.map((description, i) => (
-              <div key={description} className="flex flex-col bg-gray grow items-center justify-center rounded-md gap-[30px] flex-wrap min-w-[250px] py-[50px]">
+              <div key={description} className="flex flex-col bg-gray grow-1 items-center justify-center rounded-md gap-[30px] flex-wrap min-w-[250px] py-[50px]">
                 <Typography variant="h3">
                   {i}
                 </Typography>

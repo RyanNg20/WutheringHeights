@@ -7,6 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Modal from '../../components/modal';
 import Dropdown from '../../components/dropdown';
 import DropSlider from '../../components/dropSlider';
+import ClearIcon from '@mui/icons-material/Clear';
 import { Button1, Button2 } from '../../components/buttons'
 
 
@@ -77,9 +78,14 @@ export default function Echos() {
       
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <form className='bg-background p-16 rounded-lg flex flex-col w-[892px] gap-6'>
-          <Typography variant="h2">
-            Create Echo
-          </Typography>
+          <div className='flex flex-row justify-between'>
+            <Typography variant="h2">
+              Create Echo
+            </Typography>
+            <button onClick={() => {setShowModal(false)}}>
+              <ClearIcon/>
+            </button>
+          </div>
           <Typography variant="p">
             The app will assume the echo is rank 5 and level 25.
           </Typography>
